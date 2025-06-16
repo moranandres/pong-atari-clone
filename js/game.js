@@ -22,4 +22,24 @@ function gameLoop() {
 }
 
 gameLoop();
+// ... código anterior (v2) ...
+
+// 2) Control por teclado
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowUp' && paddle.y > 0) {
+    paddle.y -= paddle.speed;
+  }
+  if (e.key === 'ArrowDown' && paddle.y + paddle.height < canvas.height) {
+    paddle.y += paddle.speed;
+  }
+});
+
+function gameLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawPaddle();
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+
 
