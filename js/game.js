@@ -1,7 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// Configuración de la paleta
+// 1) Paleta del jugador
 const paddle = {
   width: 10,
   height: 100,
@@ -17,8 +17,9 @@ function drawPaddle() {
 
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawPaddle();
+  drawPaddle();                   // ← aquí
   requestAnimationFrame(gameLoop);
 }
 
 gameLoop();
+
