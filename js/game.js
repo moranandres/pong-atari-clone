@@ -1,5 +1,5 @@
-// js/game.js — Versión 7: puntuación y reinicio de pelota
-// (basado en v6)
+// js/game.js — Versión 8: IA del oponente y bucle final
+// (basado en v7)
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -47,6 +47,11 @@ function updateBall() {
   if (ball.x - ball.radius < 0) { scoreOpponent++; resetBall(); }
   if (ball.x + ball.radius > canvas.width) { scorePlayer++; resetBall(); }
 }
+function updateOpponent() {
+  const delta = ball.y - (opponent.y + opponent.height/2);
+  opponent.y += delta * 0.1;
+  opponent.y = Math.max(0, Math.min(opponent.y, canvas.height - opponent.height));
+}
 
 // Teclado
 window.addEventListener('keydown', e => {
@@ -55,15 +60,15 @@ window.addEventListener('keydown', e => {
     paddle.y+=paddle.speed;
 });
 
-function gameLoop() {
+function loop() {
   ctx.clearRect(0,0,canvas.width,canvas.height);
   drawPaddle();
   drawOpponent();
   drawBall();
-  drawScore();       // marcador
+  drawScore();
   updateBall();
-  requestAnimationFrame(gameLoop);
+  updateOpponent();
+  requestAnimationFrame(loop);
 }
 
-gameLoop();
-
+loop();
