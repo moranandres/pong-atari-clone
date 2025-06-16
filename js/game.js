@@ -17,6 +17,14 @@ function drawPaddle() {
   ctx.fillStyle = '#fff';
   ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
 }
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowUp' && paddle.y > 0) {
+    paddle.y -= paddle.speed;
+  }
+  if (e.key === 'ArrowDown' && paddle.y + paddle.height < canvas.height) {
+    paddle.y += paddle.speed;
+  }
+});
 
 gameLoop();
 
